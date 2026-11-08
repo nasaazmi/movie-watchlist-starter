@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\WatchedController;
 use App\Http\Controllers\Api\WatchlistController;
+use App\Http\Controllers\Api\RecommendationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -14,6 +15,7 @@ Route::prefix('auth')->group(function () {
 
 Route::get('movies', [MovieController::class, 'index']);
 Route::get('movies/{id}', [MovieController::class, 'show'])->whereNumber('id');
+Route::post('movies/recommend', RecommendationController::class)->middleware('throttle:10,1');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('watchlist', [WatchlistController::class, 'index']);
