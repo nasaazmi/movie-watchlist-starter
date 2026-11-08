@@ -65,7 +65,7 @@ class WatchedController extends Controller
             'movie_id'   => $review->movie_id,
             'rating'     => $review->rating,
             'review'     => $review->review,
-            'watched_at' => $review->updated_at,
+            'created_at' => $review->updated_at,
             'movie'      => $review->movie,
         ];
     }

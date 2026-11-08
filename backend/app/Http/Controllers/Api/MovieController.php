@@ -14,7 +14,7 @@ class MovieController extends Controller
         $params = $request->validate([
             'genre'  => ['nullable', 'string', 'max:50'],
             'search' => ['nullable', 'string', 'max:100'],
-            'random' => ['nullable', 'boolean'],
+            'random' => ['nullable', 'string', 'max:10'],
         ]);
 
         $query = Movie::query();
@@ -27,7 +27,7 @@ class MovieController extends Controller
             });
         }
 
-        if (! empty($params['random'])) {
+        if ($request->boolean('random')) {
             $query->inRandomOrder();
         } else {
             $query->orderBy('id');
